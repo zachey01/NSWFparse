@@ -1,0 +1,25 @@
+{
+  "name": "dabi-images",
+  "version": "2.7.5",
+  "description": "grabs images from websites",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "nsfw",
+    "reddit",
+    "danbooru",
+    "porn",
+    "hentai"
+  ],
+  "homepage": "https://github.com/Ena-c/dabi-images#readme",
+  "bugs": {
+    "url": "https://github.com/Ena-c/dabi-images/issues"
+  },
+  "author": "Ena",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
