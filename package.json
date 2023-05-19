@@ -1,5 +1,5 @@
 {
-  "name": "NSWFparse",
+  "name": "nswfparse",
   "version": "1.0.0",
   "description": "Parsing NSWF pictures and gifs from reddit",
   "main": "index.js",

@@ -3,13 +3,13 @@
 ### Installation
 
 ```shell
-npm install NSWFparse
+npm instal nswfparse
 ```
 
 ## Example
 
 ```js
-const NSWFparse = require("NSWFparse");
+const NSWFparse = require("nswfparse");
 const NSWFparseClient = new NSWFparse.Client();
 
 NSWFparseClient.nsfw.real
