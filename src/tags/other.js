@@ -8,12 +8,5 @@ class RealShit {
     );
   }
 
-  humor() {
-    let subreddits = ["NSFWFunny", "KnottyMemes"];
-    return requestHandler.makeRequest(
-      "reddit",
-      subreddits[Math.floor(Math.random() * subreddits.length)]
-    );
-  }
 }
 module.exports = new RealShit();

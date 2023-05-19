@@ -1,23 +1,29 @@
 {
-  "name": "dabi-images",
-  "version": "2.7.5",
-  "description": "grabs images from websites",
+  "name": "NSWFparse",
+  "version": "1.0.0",
+  "description": "Parsing NSWF pictures and gifs from reddit",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test/index.js",
+    "dev": "npx nodemon index.js"
   },
   "keywords": [
     "nsfw",
     "reddit",
-    "danbooru",
     "porn",
-    "hentai"
+    "yaoi",
+    "hentai",
+    "furry"
   ],
-  "homepage": "https://github.com/Ena-c/dabi-images#readme",
+  "homepage": "https://github.com/zachey01/NSWFparse",
   "bugs": {
-    "url": "https://github.com/Ena-c/dabi-images/issues"
+    "url": "https://github.com/zachey01/NSWFparse/issues"
   },
-  "author": "Ena",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachey01/NSWFparse.git"
+  },
+  "author": "Zachey",
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^2.6.0"

@@ -1,4 +1,4 @@
-const index = require("./index"),
+const index = require("../src/index"),
   client = new index.Client();
 (async () => {
   let func = "client.nsfw.real.femboy() =>";
@@ -116,14 +116,6 @@ const index = require("./index"),
   func = "client.nsfw.other.wallpaper() =>";
   try {
     let data = await client.nsfw.other.wallpaper();
-    console.log(func, data);
-  } catch (err) {
-    console.log(func, err);
-  }
-
-  func = "client.nsfw.other.humor() =>";
-  try {
-    let data = await client.nsfw.other.humor();
     console.log(func, data);
   } catch (err) {
     console.log(func, err);

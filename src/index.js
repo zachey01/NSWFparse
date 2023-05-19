@@ -2,7 +2,7 @@ const real = require("./tags/nsfw/real"),
   hentai = require("./tags/nsfw/hentai"),
   furry = require("./tags/nsfw/furry"),
   other = require("./tags/other");
-class DapiClientNSFW {
+class NSWFparse {
   constructor() {
     this.real = real;
     this.hentai = hentai;
@@ -10,9 +10,9 @@ class DapiClientNSFW {
     this.other = other;
   }
 }
-class DapiClient {
+class NSWFparseClient {
   constructor() {
-    this.nsfw = new DapiClientNSFW();
+    this.nsfw = new NSWFparse();
   }
 }
-module.exports = { Client: DapiClient };
+module.exports = { Client: NSWFparseClient };
