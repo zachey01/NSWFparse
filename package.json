@@ -2,7 +2,7 @@
   "name": "nswfparse",
   "version": "1.1.0",
   "description": "Parsing NSWF pictures and gifs from reddit",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "node test/index.js",
     "dev": "npx nodemon index.js"
