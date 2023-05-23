@@ -186,9 +186,7 @@ function request(source, site, regex) {
             urls.push(postId);
           });
           // gets a random cleaned url
-          let postUrl = `https://gelbooru.com/index.php?page=post&s=view&id=${
-            urls[Math.floor(Math.random() * urls.length)]
-          }`;
+          let postUrl = `${urls[Math.floor(Math.random() * urls.length)]}`;
           // I have to fetch the url again because the raw website contents only return a small thumbnail of the actual image file
           // (unlike danbooru which returns the file url)
           // this shouldn't really affect the speed *too* much
