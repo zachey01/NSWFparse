@@ -87,6 +87,21 @@ class RealShit {
     );
   }
 
+  futa() {
+    let subreddits = [
+      "futanari",
+      "futanari_Comics",
+      "FutanariHentai",
+      "FutaCum",
+      "FutaTrap",
+      "MonsterFuta",
+    ];
+    return requestHandler.makeRequest(
+      "reddit",
+      subreddits[Math.floor(Math.random() * subreddits.length)]
+    );
+  }
+
   pov() {
     let subreddits = ["POV", "POVjiggle", "POVTranny"];
     return requestHandler.makeRequest(
