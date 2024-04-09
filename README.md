@@ -48,6 +48,7 @@ NSWFparseClient.nsfw.real
 - bisexy
 - lesbian
 - bdsm
+- futa
 
 ### Furry
 
