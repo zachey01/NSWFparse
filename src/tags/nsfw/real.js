@@ -47,7 +47,7 @@ class RealShit {
       subreddits[Math.floor(Math.random() * subreddits.length)]
     );
   }
-  cumShot() {
+  gayCumShot() {
     let subreddits = ["gaycumsluts"];
     return requestHandler.makeRequest(
       "reddit",
@@ -204,6 +204,14 @@ class RealShit {
 
   bdsm() {
     let subreddits = ["bdsm", "SheLikesItRough", "Spanking", "BDSMerotica"];
+    return requestHandler.makeRequest(
+      "reddit",
+      subreddits[Math.floor(Math.random() * subreddits.length)]
+    );
+  }
+
+  cumShot() {
+    let subreddits = ["cumsluts", "cumshots", "CumshotSelfies"];
     return requestHandler.makeRequest(
       "reddit",
       subreddits[Math.floor(Math.random() * subreddits.length)]
