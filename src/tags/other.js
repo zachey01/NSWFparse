@@ -1,4 +1,4 @@
-const requestHandler = require("./handler");
+const requestHandler = require("./redditHandler");
 class Other {
   wallpaper() {
     let subreddits = ["NSFW_Wallpapers"];

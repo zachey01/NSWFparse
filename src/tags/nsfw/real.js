@@ -1,4 +1,4 @@
-const requestHandler = require("../handler");
+const requestHandler = require("../redditHandler");
 class RealShit {
   femboy() {
     let subreddits = [
