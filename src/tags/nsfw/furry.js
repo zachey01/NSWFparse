@@ -1,4 +1,4 @@
-const requestHandler = require("../redditHandler");
+const requestHandler = require("../../redditHandler");
 class RealShit {
   yaoi() {
     let subreddits = ["gfur"];
