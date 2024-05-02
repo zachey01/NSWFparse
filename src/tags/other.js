@@ -1,5 +1,5 @@
 const requestHandler = require("./handler");
-class RealShit {
+class Other {
   wallpaper() {
     let subreddits = ["NSFW_Wallpapers"];
     return requestHandler.makeRequest(
@@ -7,6 +7,5 @@ class RealShit {
       subreddits[Math.floor(Math.random() * subreddits.length)]
     );
   }
-
 }
-module.exports = new RealShit();
+module.exports = new Other();
