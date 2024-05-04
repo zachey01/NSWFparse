@@ -9,54 +9,84 @@ npm instal nswfparse
 ## Example
 
 ```js
-const NSWFparse = require("nswfparse");
-const NSWFparseClient = new NSWFparse.Client();
+const nswfparse = require("nswfparse");
 
-NSWFparseClient.nsfw.real
-  .gayAss()
-  .then((json) => {
-    console.log(json);
+// Rule34
+const options = {
+  tags: ["toys", "forest"],
+  numPage: 1,
+  limit: 1, // limit per request, maximum 100
+  remove_empty: true,
+  parse_tags: true, // whether to use tags
+  random: false, // get random post
+};
+handlers
+  .r34(options)
+  .then((payload) => {
+    console.log(payload);
   })
   .catch((error) => {
-    console.log(error);
+    console.error(error);
+  });
+
+// Reddit
+handlers.reddit.real
+  .pov()
+  .then((payload) => {
+    console.log(payload);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+// Or
+handlers
+  .redditCustom(["cats"])
+  .then((payload) => {
+    console.log(payload);
+  })
+  .catch((error) => {
+    console.error(error);
   });
 ```
 
-## Categories
+### Categories for Reddit
 
-### Hentai
+#### Real
 
-- femboy
-- yaoi
-- hentai
-
-### Real
-
-- femboy
-- manToys
-- dickPic
-- gayTwinks
 - cumShot
-- gayAss
-- gayPorn
-- shemale
-- pov
 - girlThighs
-- panties
-- girlAss
-- sissy
-- bisexy
-- lesbian
 - bdsm
-- futa
+- lesbian
+- bisexy
+- sissy
+- girlAss
+- panties
+- pov
+- shemale
+- gayPorn
+- gayAss
+- gayCumshot
+- gayTwinks
+- dickPic
+- manToys
+- femboy
 
-### Furry
+#### Hentai
+
+- femboy
+- hentai
+- yaoi
+- futanari
+
+#### Furry
 
 - yaoi
 - hentai
 - real
-- catGirls
 
-### Other
+### TODO
 
-- wallpaper
+- [x] Add Rule34
+- [x] Support in browsers
+- [ ] Add Pornhub
+- [ ] Add Xvideos

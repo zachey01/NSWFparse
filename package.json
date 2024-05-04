@@ -1,12 +1,10 @@
 {
   "name": "nswfparse",
   "version": "3.0.0",
-  "description": "Parsing NSWF pictures and gifs from reddit",
+  "description": "Parsing NSWF pictures and gifs from reddit, rule34",
   "main": "src/index.js",
   "scripts": {
-    "test": "node test/index.js",
-    "start": "node ./src/tags/redditHandler.js",
-    "start:reddit": "node ./src/tags/r34Handler.js"
+    "build": "node scripts/build"
   },
   "keywords": [
     "nsfw",
@@ -30,5 +28,9 @@
     "bent": "^7.3.12",
     "fast-xml-parser": "^3.17.4",
     "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "uglify-js": "^3.17.4"
   }
 }

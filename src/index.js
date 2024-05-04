@@ -1,21 +1,14 @@
-const real = require("./tags/nsfw/real"),
-  hentai = require("./tags/nsfw/hentai"),
-  furry = require("./tags/nsfw/furry"),
-  other = require("./tags/other");
+const { rule34 } = require("./handlers/r34Handler");
+const { makeRequest } = require("./handlers/redditHandler");
 
-class NSWFparse {
-  constructor() {
-    this.real = real;
-    this.hentai = hentai;
-    this.furry = furry;
-    this.other = other;
-  }
-}
+const furryTag = require("./tags/furry"),
+  hentaiTag = require("./tags/hentai"),
+  realTag = require("./tags/real");
 
-class NSWFparseClient {
-  constructor() {
-    this.nsfw = new NSWFparse();
-  }
-}
+const handlers = {
+  r34: rule34,
+  reddit: { furry: furryTag, hentai: hentaiTag, real: realTag },
+  redditCustom: makeRequest,
+};
 
-module.exports = { Client: NSWFparseClient };
+module.exports = handlers;
