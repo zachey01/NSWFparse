@@ -2203,7 +2203,7 @@ function shemale() {
 }
 
 function pov() {
-  return makeRequest(["POV", "POVjiggle", "POVTranny"])
+  return makeRequest(["POVTranny"])
     .then((data) => {
       return data;
     })
