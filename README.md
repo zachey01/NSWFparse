@@ -28,7 +28,7 @@ const options = {
   parse_tags: true, // whether to use tags
   random: false, // get random post
 };
-handlers
+nswfparse
   .r34(options)
   .then((payload) => {
     console.log(payload);
@@ -38,7 +38,7 @@ handlers
   });
 
 // Reddit
-handlers.reddit.real
+nswfparse.reddit.real
   .pov()
   .then((payload) => {
     console.log(payload);
@@ -47,7 +47,7 @@ handlers.reddit.real
     console.error(error);
   });
 // Or
-handlers
+nswfparse
   .redditCustom(["cats"])
   .then((payload) => {
     console.log(payload);
