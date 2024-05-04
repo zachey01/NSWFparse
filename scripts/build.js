@@ -15,11 +15,11 @@ exec("npx browserify test/example -o ./dist/nswfparse.js", (error) => {
     }
 
     let updatedData = data.replace(
-      /handlers\.reddit\.hentai\.yaoi\(\)\.then\(\(payload\) => {console\.log\(payload\);\}\)\.catch\(\(error\) => {console\.error\(error\);\}\);/,
+      /handlers\.reddit\.hentai\.yaoi\(\)\.then\(\(payload\) => {console\.log\(payload\);}\)\.catch\(\(error\) => {console\.error\(error\);}\);/,
       "window.nswfparse = handlers"
     );
 
-    updatedData = data.replace(
+    updatedData = updatedData.replace(
       /https:\/\/reddit\.com\//g,
       "https://api.reddit.com/"
     );
