@@ -1,6 +1,6 @@
 {
   "name": "nswfparse",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Parsing NSWF pictures and gifs from reddit, rule34",
   "main": "src/index.js",
   "scripts": {
