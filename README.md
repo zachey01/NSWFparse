@@ -6,6 +6,12 @@
 npm instal nswfparse
 ```
 
+or
+
+```html
+<script src="https://unpkg.com/nswfparse/dist/nswfparse.js"></script>
+```
+
 ## Example
 
 ```js
