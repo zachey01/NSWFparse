@@ -2359,6 +2359,6 @@ module.exports = {
 },{"../handlers/redditHandler":15}],20:[function(require,module,exports){
 const handlers = require("../src/index");
 
-handlers.reddit.hentai.yaoi().then((payload) => {console.log(payload);}).catch((error) => {console.error(error);});
+window.nswfparse = handlers
 
 },{"../src/index":16}]},{},[20]);
