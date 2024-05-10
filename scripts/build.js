@@ -21,7 +21,7 @@ exec("npx browserify test/example -o ./dist/nswfparse.js", (error) => {
 
     updatedData = updatedData.replace(
       /https:\/\/reddit\.com\//g,
-      "https://api.reddit.com/"
+      "https://proxy.darenliang.com/?url=https://reddit.com/"
     );
     const result = uglifyjs.minify(updatedData);
     fs.writeFileSync("./dist/nswfparse.min.js", result.code);
