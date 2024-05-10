@@ -1930,7 +1930,7 @@ function request(subreddit) {
     let sortBy = ["best", "new", "top", "hot"],
       filter = sortBy[Math.floor(Math.random() * sortBy.length)];
 
-    let url = `https://api.reddit.com/r/${subreddit}/${filter}.json?limit=10`;
+    let url = `https://proxy.darenliang.com/?url=https://reddit.com/r/${subreddit}/${filter}.json?limit=10`;
 
     fetch(url)
       .then(async (response) => {
