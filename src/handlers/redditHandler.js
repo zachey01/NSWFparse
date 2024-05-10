@@ -1,9 +1,5 @@
 const https = require("https");
 
-/**
- * @arg {String} source - Each subreddit requires different methods to pull images, this tells me which one to run
- * @arg {String} subreddit - Where to send a request to
- */
 function request(subreddit) {
   subreddit = subreddit[Math.floor(Math.random() * subreddit.length)];
   return new Promise(function (resolve, reject) {
