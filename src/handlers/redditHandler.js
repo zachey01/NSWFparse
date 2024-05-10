@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const https = require("https");
 
 /**
  * @arg {String} source - Each subreddit requires different methods to pull images, this tells me which one to run
@@ -70,19 +70,37 @@ function request(subreddit) {
 
     let url = `https://proxy.darenliang.com/?url=https://reddit.com/r/${subreddit}/${filter}.json?limit=10`;
 
-    fetch(url)
-      .then(async (response) => {
-        try {
-          let body = await response.json();
-          if (response.status !== 200) {
-            return reject(body);
-          }
-          ExtractRedditUrl(body.data.children, 0);
-        } catch (error) {
-          reject(error);
+    https
+      .get(
+        {
+          hostname: "old.reddit.com",
+          path: `/r/${subreddit}/${filter}.json?limit=10`,
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 YaBrowser/24.4.0.0 Safari/537.36",
+          },
+        },
+        (response) => {
+          let data = "";
+
+          response.on("data", (chunk) => {
+            data += chunk;
+          });
+
+          response.on("end", () => {
+            try {
+              let body = JSON.parse(data);
+              if (response.statusCode !== 200) {
+                return reject(body);
+              }
+              ExtractRedditUrl(body.data.children, 0);
+            } catch (error) {
+              reject(error);
+            }
+          });
         }
-      })
-      .catch((error) => {
+      )
+      .on("error", (error) => {
         reject(error);
       });
   });

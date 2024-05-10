@@ -1,23 +1,22 @@
-const { parse } = require("fast-xml-parser");
-const bent = require("bent");
+const https = require("https");
 
-const parseroptions = {
-  attributeNamePrefix: "",
-  textNodeName: "#text",
-  ignoreAttributes: false,
-  ignoreNameSpace: false,
-  allowBooleanAttributes: false,
-  parseNodeValue: true,
-  parseAttributeValue: true,
-  trimValues: false,
-  cdataTagName: "__cdata",
-  cdataPositionChar: "\\c",
-  parseTrueNumberOnly: false,
-  arrayMode: false,
-  stopNodes: ["parse-me-as-string"],
-};
-
-const fetchString = bent("string");
+async function fetchString(url) {
+  return new Promise((resolve, reject) => {
+    https
+      .get(url, (res) => {
+        let data = "";
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+        res.on("end", () => {
+          resolve(data);
+        });
+      })
+      .on("error", (err) => {
+        reject(err);
+      });
+  });
+}
 
 async function rule34(options) {
   if (!options || Object.keys(options).length === 0) {
@@ -44,29 +43,13 @@ async function rule34(options) {
 
   const url = `https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&tags=${options.tags.join(
     "+"
-  )}&pid=${numPage}&limit=${limit}`;
+  )}&pid=${numPage}&limit=${limit}&json=1`;
 
-  const obj = await fetchString(url);
-  const json = parse(obj, parseroptions, true);
-
-  if (json.posts && json.posts.post && options.parse_tags) {
-    if (options.remove_empty) {
-      for (let postI = 0; postI < json.posts.post.length; postI++) {
-        let cpost = json.posts.post[postI];
-        cpost.tags_parsed = cpost.tags.split(" ").filter((val) => {
-          return val != "";
-        });
-      }
-    } else {
-      for (let postI = 0; postI < json.posts.post.length; postI++) {
-        let cpost = json.posts.post[postI];
-        cpost.tags_parsed = cpost.tags.split(" ");
-      }
-    }
-  }
+  const objString = await fetchString(url);
+  const json = JSON.parse(objString);
 
   return {
-    posts: json.posts ? json.posts.post : [],
+    posts: json ? json : [],
   };
 }
 

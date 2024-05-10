@@ -24,11 +24,7 @@
   },
   "author": "Zachey",
   "license": "ISC",
-  "dependencies": {
-    "bent": "^7.3.12",
-    "fast-xml-parser": "^3.17.4",
-    "node-fetch": "^2.6.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "browserify": "^17.0.0",
     "uglify-js": "^3.17.4"
