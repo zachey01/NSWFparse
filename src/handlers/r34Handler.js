@@ -18,10 +18,22 @@ async function fetchString(url) {
   });
 }
 
+/**
++ * @param {Object} options - An object containing options for this rule.
++ * @param {string} options.tags - Tags to search for. Defaults to "all"
++ * @param {bool} options.parse_tags - If true, parses tags. Defaults to true.
++ * @param {bool} options.remove_empty - If true, removes empty tags. Defaults to true.
++ * @param {number} options.limit - The limit of posts to fetch. Defaults to 100.
++ * @param {bool} options.random - If true, fetch random page. Defaults to false.
++ * @param {number} options.numPage - The number of page to fetch. Defaults to 0.
++ *
++ * @returns {Promise} A promise containing an object with post data.
++ */
 async function rule34(options) {
   if (!options || Object.keys(options).length === 0) {
     throw "nope";
   }
+
   options.tags = options.tags || ["all"];
   options.parse_tags = options.parse_tags || true;
   options.remove_empty = options.remove_empty || true;
