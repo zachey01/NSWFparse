@@ -1,8 +1,9 @@
 const https = require("https");
 
 function request(subreddit) {
-  subreddit = subreddit[Math.floor(Math.random() * subreddit.length)];
   return new Promise(function (resolve, reject) {
+    subreddit = subreddit[Math.floor(Math.random() * subreddit.length)];
+
     if (!subreddit) {
       return reject({
         reason: "No subreddit supplied",
@@ -11,12 +12,13 @@ function request(subreddit) {
     }
 
     let date = Date.now();
+
     function ExtractRedditUrl(body, tries) {
       if (tries >= 10) {
         return reject({
           reason: "retry limit exceeded",
           message: "Failed to find a suitable post",
-          subbredit: subreddit,
+          subreddit: subreddit,
         });
       }
 
@@ -27,8 +29,8 @@ function request(subreddit) {
       if (/(.jpg|.png|.gif|.jpeg)$/gi.test(post.url)) {
         let payload = {
           url: post.url,
-          source: post.permalink,
-          nsfw: true,
+          source: `https://reddit.com${post.permalink}`,
+          nsfw: post.over_18,
           tries: tries,
           time: ((Date.now() - date) / 1000).toFixed(2),
         };
@@ -44,11 +46,14 @@ function request(subreddit) {
                 ExtractRedditUrl(body, tries);
                 break;
               default:
-                if (!post.media.oembed.thumbnail_url.includes("gfycat")) {
+                if (
+                  post.media.oembed &&
+                  !post.media.oembed.thumbnail_url.includes("gfycat")
+                ) {
                   let payload = {
                     url: post.media.oembed.thumbnail_url,
-                    source: post.permalink,
-                    nsfw: true,
+                    source: `https://reddit.com${post.permalink}`,
+                    nsfw: post.over_18,
                     tries: tries,
                     time: ((Date.now() - date) / 1000).toFixed(2),
                   };
@@ -61,16 +66,15 @@ function request(subreddit) {
       }
     }
 
-    let sortBy = ["best", "new", "top", "hot"],
-      filter = sortBy[Math.floor(Math.random() * sortBy.length)];
+    let sortBy = ["best", "new", "top", "hot"];
+    let filter = sortBy[Math.floor(Math.random() * sortBy.length)];
 
-    let url = `https://proxy.darenliang.com/?url=https://reddit.com/r/${subreddit}/${filter}.json?limit=10`;
+    let url = `https://old.reddit.com/r/${subreddit}/${filter}.json?limit=10`;
 
     https
       .get(
+        url,
         {
-          hostname: "old.reddit.com",
-          path: `/r/${subreddit}/${filter}.json?limit=10`,
           headers: {
             "User-Agent":
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 YaBrowser/24.4.0.0 Safari/537.36",
