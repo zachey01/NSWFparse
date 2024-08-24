@@ -3,9 +3,7 @@
   "version": "3.2.0",
   "description": "Parsing NSWF pictures and gifs from reddit, rule34",
   "main": "src/index.js",
-  "scripts": {
-    "build": "node scripts/build"
-  },
+  "scripts": {},
   "keywords": [
     "nsfw",
     "reddit",
@@ -23,10 +21,6 @@
     "url": "git+https://github.com/zachey01/NSWFparse.git"
   },
   "author": "Zachey",
-  "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {
-    "browserify": "^17.0.0",
-    "uglify-js": "^3.17.4"
-  }
+  "license": "MIT",
+  "dependencies": {}
 }
