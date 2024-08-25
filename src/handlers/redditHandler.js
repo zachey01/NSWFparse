@@ -1,79 +1,72 @@
-async function request(subreddit) {
-  subreddit = subreddit[Math.floor(Math.random() * subreddit.length)];
+async function fetchRedditPost(subreddits) {
+  const subreddit = subreddits[Math.floor(Math.random() * subreddits.length)];
 
   if (!subreddit) {
-    throw {
-      reason: "No subreddit supplied",
-      message: "Couldn't do request because there wasn't a subreddit",
-    };
+    throw new Error("No subreddit provided");
   }
 
-  let date = Date.now();
+  const startTime = Date.now();
 
-  async function ExtractRedditUrl(body, tries) {
-    if (tries >= 10) {
-      throw {
-        reason: "retry limit exceeded",
-        message: "Failed to find a suitable post",
-        subreddit: subreddit,
-      };
+  async function extractRedditUrl(posts, attempts) {
+    if (attempts >= 10) {
+      throw new Error(
+        `Retry limit exceeded: Failed to find a suitable post in subreddit ${subreddit}`
+      );
     }
 
-    tries++;
+    const post = posts[Math.floor(Math.random() * posts.length)].data;
 
-    let post = body[Math.floor(Math.random() * body.length)].data;
-
-    if (/(.jpg|.png|.gif|.jpeg)$/gi.test(post.url)) {
+    if (/\.(jpg|png|gif|jpeg)$/i.test(post.url)) {
       return {
         url: post.url,
         source: `https://reddit.com${post.permalink}`,
         nsfw: post.over_18,
-        tries: tries,
-        time: ((Date.now() - date) / 1000).toFixed(2),
+        attempts,
+        time: ((Date.now() - startTime) / 1000).toFixed(2),
       };
-    } else {
-      if (post.is_video || post.media === null) {
-        return ExtractRedditUrl(body, tries);
-      } else if (
-        post.media.oembed &&
-        !post.media.oembed.thumbnail_url.includes("gfycat")
-      ) {
-        return {
-          url: post.media.oembed.thumbnail_url,
-          source: `https://reddit.com${post.permalink}`,
-          nsfw: post.over_18,
-          tries: tries,
-          time: ((Date.now() - date) / 1000).toFixed(2),
-        };
-      } else {
-        return ExtractRedditUrl(body, tries);
-      }
     }
+
+    if (post.is_video || post.media === null) {
+      return extractRedditUrl(posts, attempts + 1);
+    }
+
+    if (
+      post.media?.oembed?.thumbnail_url &&
+      !post.media.oembed.thumbnail_url.includes("gfycat")
+    ) {
+      return {
+        url: post.media.oembed.thumbnail_url,
+        source: `https://reddit.com${post.permalink}`,
+        nsfw: post.over_18,
+        attempts,
+        time: ((Date.now() - startTime) / 1000).toFixed(2),
+      };
+    }
+
+    return extractRedditUrl(posts, attempts + 1);
   }
 
-  let sortBy = ["best", "new", "top", "hot"];
-  let filter = sortBy[Math.floor(Math.random() * sortBy.length)];
+  const sortOptions = ["best", "new", "top", "hot"];
+  const sortBy = sortOptions[Math.floor(Math.random() * sortOptions.length)];
 
-  let url = `https://old.reddit.com/r/${subreddit}/${filter}.json?limit=10`;
+  const apiUrl = `https://old.reddit.com/r/${subreddit}/${sortBy}.json?limit=10`;
 
   try {
-    let response = await fetch(url, {
+    const response = await fetch(apiUrl, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 YaBrowser/24.4.0.0 Safari/537.36",
       },
     });
 
-    let data = await response.json();
+    const data = await response.json();
+    if (!response.ok)
+      throw new Error(`Network response was not ok: ${response.statusText}`);
 
-    if (!response.ok) {
-      throw data;
-    }
-
-    return await ExtractRedditUrl(data.data.children, 0);
+    return await extractRedditUrl(data.data.children, 0);
   } catch (error) {
-    throw error;
+    throw new Error(`Fetch error: ${error.message}`);
   }
 }
 
-module.exports.makeRequest = request;
+module.exports = { fetchRedditPost };

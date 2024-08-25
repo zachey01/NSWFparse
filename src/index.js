@@ -1,14 +1,18 @@
-const { rule34 } = require("./handlers/r34Handler");
-const { makeRequest } = require("./handlers/redditHandler");
+const { fetchRule34Posts } = require("./handlers/r34handler");
+const { fetchRedditPost } = require("./handlers/reddithandler");
 
-const furryTag = require("./tags/furry"),
-  hentaiTag = require("./tags/hentai"),
-  realTag = require("./tags/real");
+const furryTag = require("./tags/furry");
+const hentaiTag = require("./tags/hentai");
+const realTag = require("./tags/real");
 
 const handlers = {
-  r34: rule34,
-  reddit: { furry: furryTag, hentai: hentaiTag, real: realTag },
-  redditCustom: makeRequest,
+  rule34: fetchRule34Posts,
+  reddit: {
+    furry: furryTag,
+    hentai: hentaiTag,
+    real: realTag,
+  },
+  redditCustom: fetchRedditPost,
 };
 
 module.exports = handlers;
