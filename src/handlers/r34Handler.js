@@ -1,37 +1,18 @@
-const https = require("https");
-
 async function fetchString(url) {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        let data = "";
-        res.on("data", (chunk) => {
-          data += chunk;
-        });
-        res.on("end", () => {
-          resolve(data);
-        });
-      })
-      .on("error", (err) => {
-        reject(err);
-      });
-  });
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+    return await response.text();
+  } catch (error) {
+    throw new Error(`Fetch error: ${error.message}`);
+  }
 }
 
-/**
-+ * @param {Object} options - An object containing options for this rule.
-+ * @param {string} options.tags - Tags to search for. Defaults to "all"
-+ * @param {bool} options.parse_tags - If true, parses tags. Defaults to true.
-+ * @param {bool} options.remove_empty - If true, removes empty tags. Defaults to true.
-+ * @param {number} options.limit - The limit of posts to fetch. Defaults to 100.
-+ * @param {bool} options.random - If true, fetch random page. Defaults to false.
-+ * @param {number} options.numPage - The number of page to fetch. Defaults to 0.
-+ *
-+ * @returns {Promise} A promise containing an object with post data.
-+ */
 async function rule34(options) {
   if (!options || Object.keys(options).length === 0) {
-    throw "nope";
+    throw new Error("No options provided");
   }
 
   options.tags = options.tags || ["all"];
@@ -49,7 +30,9 @@ async function rule34(options) {
   }
 
   if (limit > 100) {
-    console.warn("100 is limit, using everything larger makes no sense");
+    console.warn(
+      "100 is the limit, using values larger than this makes no sense"
+    );
     limit = 100;
   }
 
