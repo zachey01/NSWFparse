@@ -1,5 +1,8 @@
 async function fetchRedditPost(subreddits) {
-  const subreddit = subreddits[Math.floor(Math.random() * subreddits.length)];
+  const subredditArray = Array.isArray(subreddits) ? subreddits : [subreddits];
+
+  const subreddit =
+    subredditArray[Math.floor(Math.random() * subredditArray.length)];
 
   if (!subreddit) {
     throw new Error("No subreddit provided");
