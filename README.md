@@ -87,6 +87,5 @@ nswfparse
 ### TODO
 
 - [x] Add Rule34
-- [x] Support in browsers
 - [ ] Add Pornhub
 - [ ] Add Xvideos
