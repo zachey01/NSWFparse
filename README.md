@@ -1,9 +1,11 @@
-﻿# NSWFparse
+
+
+# NSWFparse
 
 ### Installation
 
 ```shell
-npm instal nswfparse
+npm install nswfparse
 ```
 
 ## Example
